@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .root {
+            height: 100%;
+            position: relative;
+        }
+
+        #square {
+            position: absolute;
+            top: calc(50% - 100px);
+            left: calc(50% - 100px);
+            height: 200px;
+            width: 200px;
+            background-color: red;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="root">
+        <div id="square"></div>
+    </div>
+    <script>
+        (function () {
+            var squareXTransform = 0,
+                squareYTransform = 0;
+
+            var square = document.getElementById("square");
+            var oldX = 0;
+            var oldY = 0;
+
+            var mousemovemethod = function (e) {
+                if (e.pageX < oldX) {
+                    squareXTransform++;
+                } else if (e.pageX > oldX) {
+                    squareXTransform--;
+                }
+
+                if (e.pageY < oldY) {
+                    squareYTransform++;
+                } else if (e.pageY > oldY) {
+                    squareYTransform--;
+                }
+
+                oldX = e.pageX;
+                oldY = e.pageY;
+
+                square.style.transform =
+                    "translate(" + squareXTransform + "px, " + squareYTransform + "px)";
+            };
+
+            document.addEventListener("mousemove", mousemovemethod);
+        })();
+    </script>
+</body>
+
+</html>
